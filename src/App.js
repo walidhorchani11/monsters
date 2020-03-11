@@ -22,14 +22,12 @@ class App extends Component {
       
   }
 
-  handleChange = (event) => {
-    let searchInput = event.target.value;
-    this.setState({searchField: searchInput})
-    //filter monsters selon searchField
-
-  }
-
   render(){
+    //besoin davoir les monsters du state intacte, pcq on modifiant directement le state monsters, au 2eme ou nieme changement dans l'input searchFeild, on n'aura pas les monsters completes mais deja filter, alors la sol est de faire le filter au niveau du render avec un new champs qui prends tous les monsters du state, puisqu il va etre reexecuter lors du setState (lors du changement d input) 
+    const { monsters, searchField } = this.state;
+    const filteredMonsters = monsters.filter(monster => 
+      monster.name.toLowerCase().includes(searchField.toLowerCase())
+      )
     return (
       <div>
         {console.log('component rendered ...')}
@@ -39,7 +37,8 @@ class App extends Component {
             
             }}/>
         </div>
-        <CardList monsters = {this.state.monsters}/>
+        {/* <CardList monsters = {this.state.monsters}/> */}
+        <CardList monsters = {this.state.searchField.length > 0 ? filteredMonsters : monsters}/>
       </div>
     )
   }
