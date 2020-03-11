@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {CardList} from './components/card-list/card-list.component';
+import {SearchBox} from './components/search-box/search-box.component';
+import './App.css';
 
 class App extends Component {
 
@@ -22,6 +24,10 @@ class App extends Component {
       
   }
 
+  handleSearch= e => {
+    this.setState({searchField: e.target.value})
+  }
+
   render(){
     //besoin davoir les monsters du state intacte, pcq on modifiant directement le state monsters, au 2eme ou nieme changement dans l'input searchFeild, on n'aura pas les monsters completes mais deja filter, alors la sol est de faire le filter au niveau du render avec un new champs qui prends tous les monsters du state, puisqu il va etre reexecuter lors du setState (lors du changement d input) 
     const { monsters, searchField } = this.state;
@@ -29,14 +35,13 @@ class App extends Component {
       monster.name.toLowerCase().includes(searchField.toLowerCase())
       )
     return (
-      <div>
+      <div className='App'>
+        <h1>Monsters Rolodex</h1>
         {console.log('component rendered ...')}
-        <div>
-          <input type='search' placeholder='search monster' onChange={e => {
-            this.setState({searchField: e.target.value}, () => console.log(this.state.searchField));
-            
-            }}/>
-        </div>
+        <SearchBox
+          placeholder='search monster'
+          handleSearch={this.handleSearch}
+        />
         {/* <CardList monsters = {this.state.monsters}/> */}
         <CardList monsters = {this.state.searchField.length > 0 ? filteredMonsters : monsters}/>
       </div>
