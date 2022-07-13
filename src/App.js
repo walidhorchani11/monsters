@@ -49,7 +49,6 @@ const App = () => {
         <div>
           <h1>Monsters Rolodex</h1>
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
             <p>
               Edit <code>src/App.js</code> and save to reload.
         </p>
