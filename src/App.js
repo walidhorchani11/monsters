@@ -48,6 +48,7 @@ const App = () => {
       {status === STATUS_REQUEST.SUCCESS && (
         <div>
           <h1>Monsters Rolodex</h1>
+          <h2>learn react</h2>
           <SearchBox placeholder="search monster" handleSearch={handleSearch} />
           <CardList
             monsters={monsters.filter((elem) => {
